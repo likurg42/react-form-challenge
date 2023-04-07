@@ -3,7 +3,10 @@ import React, { PropsWithChildren } from 'react';
 
 const FormEl = styled('form')(({ theme }) => ({
   width: '100%',
-  marginTop: theme.spacing(1),
+  marginTop: theme.spacing(3),
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
 }));
 
 interface Props {

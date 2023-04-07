@@ -9,12 +9,10 @@ import { Input } from '../components/form/Input';
 import { Form } from '../components/form/Form';
 import { PrimaryButton } from '../components/Button';
 import { MainContainer } from '../components/MainContainer';
+import { MainFormValues } from '../types/form';
+import { useFormContext } from '../hooks/useFormContext';
 
-interface FormValues {
-  email: string;
-  phoneNumber: number;
-  hasPhone: boolean;
-}
+type FormValues = Pick<MainFormValues, 'email' | 'phoneNumber' | 'hasPhone'>;
 
 const schema = yup.object().shape({
   email: yup
@@ -31,17 +29,25 @@ const normalizePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
 };
 
 export const StepTwo = () => {
+  const { data, setValues } = useFormContext();
   const navigate = useNavigate();
   const {
     register, handleSubmit, formState: { errors }, watch,
   } = useForm<FormValues>({
+    defaultValues: {
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      hasPhone: data.hasPhone,
+    },
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: yupResolver(schema),
   });
+
   const hasPhone = watch('hasPhone');
 
-  const onSubmit = () => {
+  const onSubmit = (formValues: FormValues) => {
+    setValues(formValues);
     navigate('/step-3');
   };
 
@@ -63,9 +69,13 @@ export const StepTwo = () => {
           helperText={errors?.email?.message}
         />
         <FormControlLabel
-          control={
-            <Checkbox {...register('hasPhone')} color="primary" />
-          }
+          control={(
+            <Checkbox
+              {...register('hasPhone')}
+              defaultChecked={data.hasPhone}
+              color="primary"
+            />
+          )}
           label="Do you have a phone"
         />
         {hasPhone && (

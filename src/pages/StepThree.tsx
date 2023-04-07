@@ -5,15 +5,21 @@ import { MainContainer } from '../components/MainContainer';
 import { Form } from '../components/form/Form';
 import { FileInput } from '../components/form/FileInput';
 import { PrimaryButton } from '../components/Button';
+import { MainFormValues } from '../types/form';
+import { useFormContext } from '../hooks/useFormContext';
 
-interface FormValues {
-  files: File[],
-}
+type FormValues = Pick<MainFormValues, 'files'>;
 
 export const StepThree = () => {
-  const { control, handleSubmit } = useForm<FormValues>();
+  const { data, setValues } = useFormContext();
+  const { control, handleSubmit } = useForm<FormValues>({
+    defaultValues: { files: data.files },
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+  });
   const navigate = useNavigate();
-  const onSubmit = () => {
+  const onSubmit = (formValues: FormValues) => {
+    setValues({ files: formValues.files });
     navigate('/result');
   };
   return (

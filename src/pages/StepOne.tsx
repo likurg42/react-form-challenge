@@ -7,11 +7,10 @@ import { PrimaryButton } from '../components/Button';
 import { Input } from '../components/form/Input';
 import { Form } from '../components/form/Form';
 import { MainContainer } from '../components/MainContainer';
+import { useFormContext } from '../hooks/useFormContext';
+import { MainFormValues } from '../types/form';
 
-interface FormValues {
-  firstName: string;
-  lastName: string;
-}
+type FormValues = Pick<MainFormValues, 'firstName' | 'lastName'>;
 
 const schema = yup.object().shape({
   firstName: yup.string()
@@ -23,13 +22,18 @@ const schema = yup.object().shape({
 });
 
 export const StepOne = () => {
+  const { data, setValues } = useFormContext();
+  const { firstName, lastName } = data;
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
+    defaultValues: { firstName, lastName },
     mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
     resolver: yupResolver(schema),
   });
   const navigate = useNavigate();
 
-  const onSubmit = () => {
+  const onSubmit = (formValues: FormValues) => {
+    setValues(formValues);
     navigate('/step-2');
   };
 
