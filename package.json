@@ -1,0 +1,51 @@
+{
+  "name": "react-useform",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "eslint": "npx eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "eslint-fix": "npx eslint --fix --ext .js,.jsx,.ts,.tsx ./src",
+    "lint-types": "npx tsc",
+    "prepare": "husky install",
+    "pre-commit": "npm run eslint && npm run lint-types"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^3.0.0",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.15",
+    "libphonenumber-js": "^1.10.24",
+    "npm": "^9.6.3",
+    "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-hook-form": "^7.43.9",
+    "react-router-dom": "^6.10.0",
+    "sweetalert2": "^11.7.3",
+    "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "@vitejs/plugin-react": "^3.1.0",
+    "eslint": "^8.37.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0",
+    "husky": "^8.0.0"
+  }
+}
